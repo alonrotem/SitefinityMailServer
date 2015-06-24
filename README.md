@@ -3,7 +3,7 @@ Sitefinity Mail Server is Windws Forms application for testing, inspecting and s
 ![SitefinityMailServer main window](https://raw.githubusercontent.com/alonrotem/SitefinityMailServer/master/Screenshots/Screenshot%20-%20Main%20window.png)
 
 ## Notable features
-* Runs an SMTP server (listening on any configured port) and receives messages (in contrast to tools like [smtp4dev](https://smtp4dev.codeplex.com/), messages are not stored and are not displayed, but only counted). Does not store any messages, does not really send any messages anywhere
+* Runs an SMTP server (listening on any configured port) and receives messages (in contrast to tools like <a href="https://smtp4dev.codeplex.com/" target="_blank">smtp4dev</a>, messages are not stored and are not displayed, but only counted). Does not store any messages, does not really send any messages anywhere
    
 * SMTP messages are received for regardless of their recipients' addresses.
 
@@ -15,7 +15,7 @@ The POP3 server accepts any user, with any password. If the POP3 username is of 
 The same username must be defined in Sitefinity as the Bounced messages POP3 user (with any password). Otherwise, if the POP3 session user is any other user, the POP3 server returns nothing.   
 ![](https://raw.githubusercontent.com/alonrotem/SitefinityMailServer/master/Screenshots/Screenshot%20-%20Notification%20Icon%20Messages%20Collected.png)
 
-* Auto-detects whether [hMailServer](https://www.hmailserver.com/) is already running on the machine and offers to stop its service for you, to avoid a port-collision.
+* Auto-detects whether <a href="https://www.hmailserver.com/" target="_blank">hMailServer</a> is already running on the machine and offers to stop its service for you, to avoid a port-collision.
 
 * Shows statistics of the number of received messages and a list of all the recipients' addresses.
 
@@ -27,8 +27,9 @@ The same username must be defined in Sitefinity as the Bounced messages POP3 use
   - Tray menu to stop/start the server, see recipients etc.    
   ![](https://raw.githubusercontent.com/alonrotem/SitefinityMailServer/master/Screenshots/Screenshot%20-%20Notification%20Icon%20Menu.png)
 
-**Note:** The server runs and does everything in memory. If you restart the server, or the whole application, all the data of messages and bounced counters gets reset (user settings are saved).
-
+**Notes:** 
+* The server runs and does everything in memory. If you restart the server, or the whole application, all the data of messages and bounced counters gets reset (user settings are saved).
+* This application contains animated <a href="https://en.wikipedia.org/wiki/Nyan_Cat" target="_blank" title="NyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyanNyan">Nyan cats</a> (with no sound, thank God), in case you are allergic.
 
 ## Pending desired features ##
 
@@ -36,13 +37,11 @@ The same username must be defined in Sitefinity as the Bounced messages POP3 use
 * Simulate email campaigns:
  - Link clicks in message
  - Opening a message
-* Add *Change port* » open options dialog, when [hMailServer](https://www.hmailserver.com/) crashes the application
+* Add *Change port* » open options dialog, when <a href="https://www.hmailserver.com/" target="_blank">hMailServer</a> crashes the application
 * shorten the balloon time when a message is received (or display in bulks)
 
 ## Embedded open source ##
 This tool uses embedded source from open projects:
-* SMTP server based on [Eric Daugherty's Simple Mail Processor](http://www.ericdaugherty.com/apps/simplemailprocessor/).
-* POP3 server based on [LumiSoft Mail Server](http://www.lumisoft.ee/lsWWW/ENG/Products/Mail_Server/mail_index_eng.aspx?type=info).   
+* SMTP server based on <a href="http://www.ericdaugherty.com/apps/simplemailprocessor/" target="_blank">Eric Daugherty's Simple Mail Processor</a>.
+* POP3 server based on <a href="http://www.lumisoft.ee/lsWWW/ENG/Products/Mail_Server/mail_index_eng.aspx?type=info" target="_blank">LumiSoft Mail Server</a>.  
 ![About](https://raw.githubusercontent.com/alonrotem/SitefinityMailServer/master/Screenshots/Screenshot%20-%20About%20window.png)
-
-
