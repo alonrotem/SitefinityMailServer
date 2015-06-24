@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2160B0A8-41FC-4EA8-8BC9-2C546A23465D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SitefinityMailServer</RootNamespace>
+    <AssemblyName>SitefinityMailServer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Nyan-MultiIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutDialog.Designer.cs">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BouncedUserMessage.cs" />
+    <Compile Include="MailServerUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MailServerUI.Designer.cs">
+      <DependentUpon>MailServerUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POP3\AuthType.cs" />
+    <Compile Include="POP3\AuthUser_EventArgs.cs" />
+    <Compile Include="POP3\Auth\AUTH_e_Authenticate.cs" />
+    <Compile Include="POP3\Auth\AUTH_e_UserInfo.cs" />
+    <Compile Include="POP3\Auth\Auth_HttpDigest.cs" />
+    <Compile Include="POP3\Auth\Auth_HttpDigest_NonceManager.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_Client.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_Client_CramMd5.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_Client_DigestMd5.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_Client_Login.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_Client_Ntlm.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_Client_Plain.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_Client_XOAuth.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_DigestMD5_Challenge.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_DigestMD5_Response.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_ServerMechanism.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_ServerMechanism_CramMd5.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_ServerMechanism_DigestMd5.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_ServerMechanism_Login.cs" />
+    <Compile Include="POP3\Auth\AUTH_SASL_ServerMechanism_Plain.cs" />
+    <Compile Include="POP3\commonDelegates.cs" />
+    <Compile Include="POP3\Error_EventArgs.cs" />
+    <Compile Include="POP3\IO\Base64.cs" />
+    <Compile Include="POP3\IO\Base64Stream.cs" />
+    <Compile Include="POP3\IO\DataSizeExceededException.cs" />
+    <Compile Include="POP3\IO\FifoBuffer.cs" />
+    <Compile Include="POP3\IO\IncompleteDataException.cs" />
+    <Compile Include="POP3\IO\JunkingStream.cs" />
+    <Compile Include="POP3\IO\LineSizeExceededException.cs" />
+    <Compile Include="POP3\IO\MemoryStreamEx.cs" />
+    <Compile Include="POP3\IO\MultiStream.cs" />
+    <Compile Include="POP3\IO\PartialStream.cs" />
+    <Compile Include="POP3\IO\QuotedPrintableStream.cs" />
+    <Compile Include="POP3\IO\ReadWriteControlledStream.cs" />
+    <Compile Include="POP3\IO\SizeExceededAction.cs" />
+    <Compile Include="POP3\IO\SmartStream.cs" />
+    <Compile Include="POP3\Log\LogEntry.cs" />
+    <Compile Include="POP3\Log\LogEntryType.cs" />
+    <Compile Include="POP3\Log\Logger.cs" />
+    <Compile Include="POP3\Log\WriteLogEventArgs.cs" />
+    <Compile Include="POP3\Net\AsyncOP.cs" />
+    <Compile Include="POP3\Net\AsyncOP_State.cs" />
+    <Compile Include="POP3\Net\BalanceMode.cs" />
+    <Compile Include="POP3\Net\BindInfoProtocol.cs" />
+    <Compile Include="POP3\Net\ByteBuilder.cs" />
+    <Compile Include="POP3\Net\CircleCollection.cs" />
+    <Compile Include="POP3\Net\EventArgs.cs" />
+    <Compile Include="POP3\Net\ExceptionEventArgs.cs" />
+    <Compile Include="POP3\Net\HostEndPoint.cs" />
+    <Compile Include="POP3\Net\HostEntry.cs" />
+    <Compile Include="POP3\Net\IAsyncOP.cs" />
+    <Compile Include="POP3\Net\IPBindInfo.cs" />
+    <Compile Include="POP3\Net\KeyValueCollection.cs" />
+    <Compile Include="POP3\Net\Net_Utils.cs" />
+    <Compile Include="POP3\Net\ParseException.cs" />
+    <Compile Include="POP3\Net\PortRange.cs" />
+    <Compile Include="POP3\Net\Range_long.cs" />
+    <Compile Include="POP3\Net\SslMode.cs" />
+    <Compile Include="POP3\Net\StringReader.cs" />
+    <Compile Include="POP3\Net\TextUtils.cs" />
+    <Compile Include="POP3\Net\TimerEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="POP3\Net\WellKnownPorts.cs" />
+    <Compile Include="POP3\Net\_AsyncResultState.cs" />
+    <Compile Include="POP3\Net\_MD4.cs" />
+    <Compile Include="POP3\Pop3SessionEventArgs.cs" />
+    <Compile Include="POP3\POP3_e_Authenticate.cs" />
+    <Compile Include="POP3\POP3_e_DeleteMessage.cs" />
+    <Compile Include="POP3\POP3_e_GetMessagesInfo.cs" />
+    <Compile Include="POP3\POP3_e_GetMessageStream.cs" />
+    <Compile Include="POP3\POP3_e_GetTopOfMessage.cs" />
+    <Compile Include="POP3\POP3_e_Started.cs" />
+    <Compile Include="POP3\POP3_Server.cs" />
+    <Compile Include="POP3\POP3_ServerMessage.cs" />
+    <Compile Include="POP3\POP3_Session.cs" />
+    <Compile Include="POP3\TCP\TCP_Client.cs" />
+    <Compile Include="POP3\TCP\TCP_Server.cs" />
+    <Compile Include="POP3\TCP\TCP_ServerSession.cs" />
+    <Compile Include="POP3\TCP\TCP_ServerSessionEventArgs.cs" />
+    <Compile Include="POP3\TCP\TCP_Session.cs" />
+    <Compile Include="POP3\TCP\TCP_SessionCollection.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceivedMailDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReceivedMailDialog.Designer.cs">
+      <DependentUpon>ReceivedMailDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecipientsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecipientsDialog.Designer.cs">
+      <DependentUpon>RecipientsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsDialog.Designer.cs">
+      <DependentUpon>SettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SitefinityMailSettings.cs" />
+    <Compile Include="SMTP\Common\EmailAddress.cs" />
+    <Compile Include="SMTP\Common\InvalidEmailAddressException.cs" />
+    <Compile Include="SMTP\FileSpool\FileMessageSpool.cs" />
+    <Compile Include="SMTP\IMessageSpool.cs" />
+    <Compile Include="SMTP\IRecipientFilter.cs" />
+    <Compile Include="SMTP\LocalRecipientFilter.cs" />
+    <Compile Include="SMTP\MemoryMessageSpool.cs" />
+    <Compile Include="SMTP\SimpleSMTPServer.cs" />
+    <Compile Include="SMTP\SMTPContext.cs" />
+    <Compile Include="SMTP\SMTPMessage.cs" />
+    <Compile Include="SMTP\SMTPMessagePart.cs" />
+    <Compile Include="SMTP\SMTPProcessor.cs" />
+    <Compile Include="SocketErrorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SocketErrorDialog.Designer.cs">
+      <DependentUpon>SocketErrorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMessage.cs" />
+    <EmbeddedResource Include="AboutDialog.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MailServerUI.resx">
+      <DependentUpon>MailServerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ReceivedMailDialog.resx">
+      <DependentUpon>ReceivedMailDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecipientsDialog.resx">
+      <DependentUpon>RecipientsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsDialog.resx">
+      <DependentUpon>SettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SocketErrorDialog.resx">
+      <DependentUpon>SocketErrorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Nyan-MultiIcon.ico" />
+    <EmbeddedResource Include="Resources\Mail_Bounced.png" />
+    <EmbeddedResource Include="Resources\Mail_Closed.png" />
+    <EmbeddedResource Include="Resources\Mail_Open.png" />
+    <EmbeddedResource Include="Resources\ServerOff.ico" />
+    <EmbeddedResource Include="Resources\ServerOn.ico" />
+    <None Include="Resources\NyanAbout.gif" />
+    <EmbeddedResource Include="Resources\Nyan.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\switch_Down.png" />
+    <EmbeddedResource Include="Resources\switch_Up.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
