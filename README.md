@@ -15,7 +15,7 @@ The POP3 server accepts any user, with any password. If the POP3 username is of 
 The same username must be defined in Sitefinity as the Bounced messages POP3 user (with any password). Otherwise, if the POP3 session user is any other user, the POP3 server returns nothing.
 ![](https://raw.githubusercontent.com/alonrotem/SitefinityMailServer/master/Screenshots/Screenshot%20-%20Notification%20Icon%20Messages%20Collected.png)
 
-* Auto-detects whether hMailServer is already running on the machine and offers to stop its service for you, to avoid a port-collission.
+* Auto-detects whether [hMailServer](https://www.hmailserver.com/) is already running on the machine and offers to stop its service for you, to avoid a port-collission.
 
 * Shows statistics of the number of received messages and a list of all the recipients' addresses.
 
@@ -36,7 +36,7 @@ The same username must be defined in Sitefinity as the Bounced messages POP3 use
 * Simulate email campaigns:
  - link clicks in message
  - opening a message
-* add "change port" -> open options dialog, when hMailServer crashes the application
+* add "change port" -> open options dialog, when [hMailServer](https://www.hmailserver.com/) crashes the application
 * shorten the balloon time when a message is received (or display in bulks)
 
 ## Embedded open source ##
