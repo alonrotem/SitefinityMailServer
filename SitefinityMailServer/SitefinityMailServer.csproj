@@ -56,13 +56,16 @@
     <Compile Include="AboutDialog.Designer.cs">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="BouncedUserMessage.cs" />
     <Compile Include="MailServerUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MailServerUI.Designer.cs">
       <DependentUpon>MailServerUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\BounceError.cs" />
+    <Compile Include="Model\BounceMessage.cs" />
+    <Compile Include="Model\BounceUser.cs" />
+    <Compile Include="Model\UserMessage.cs" />
     <Compile Include="POP3\AuthType.cs" />
     <Compile Include="POP3\AuthUser_EventArgs.cs" />
     <Compile Include="POP3\Auth\AUTH_e_Authenticate.cs" />
@@ -184,7 +187,6 @@
     <Compile Include="SocketErrorDialog.Designer.cs">
       <DependentUpon>SocketErrorDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserMessage.cs" />
     <EmbeddedResource Include="AboutDialog.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </EmbeddedResource>

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SitefinityMailServer
+namespace SitefinityMailServer.Model
 {
-    public class UserMessage
+    internal class UserMessage
     {
         public string Recipient
         {

@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioOtherReason = new System.Windows.Forms.RadioButton();
-            this.radioMailboxFull = new System.Windows.Forms.RadioButton();
-            this.radioUnknownUser = new System.Windows.Forms.RadioButton();
+            this.bounceErrorCombo = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnAddAbounceAddress = new System.Windows.Forms.Button();
             this.txtAddBounceAddress = new System.Windows.Forms.TextBox();
             this.btnRemoveBounce = new System.Windows.Forms.Button();
@@ -50,10 +51,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.bounceErrorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bounceErrorBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -81,11 +82,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.bounceErrorCombo);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.radioOtherReason);
-            this.groupBox2.Controls.Add(this.radioMailboxFull);
-            this.groupBox2.Controls.Add(this.radioUnknownUser);
             this.groupBox2.Controls.Add(this.btnAddAbounceAddress);
             this.groupBox2.Controls.Add(this.txtAddBounceAddress);
             this.groupBox2.Location = new System.Drawing.Point(12, 149);
@@ -95,37 +94,31 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "New Bounced User";
             // 
-            // radioOtherReason
+            // bounceErrorCombo
             // 
-            this.radioOtherReason.AutoSize = true;
-            this.radioOtherReason.Location = new System.Drawing.Point(6, 115);
-            this.radioOtherReason.Name = "radioOtherReason";
-            this.radioOtherReason.Size = new System.Drawing.Size(139, 17);
-            this.radioOtherReason.TabIndex = 17;
-            this.radioOtherReason.Text = "Other (unknown) reason";
-            this.radioOtherReason.UseVisualStyleBackColor = true;
+            this.bounceErrorCombo.FormattingEnabled = true;
+            this.bounceErrorCombo.Location = new System.Drawing.Point(6, 69);
+            this.bounceErrorCombo.Name = "bounceErrorCombo";
+            this.bounceErrorCombo.Size = new System.Drawing.Size(333, 21);
+            this.bounceErrorCombo.TabIndex = 20;
             // 
-            // radioMailboxFull
+            // label7
             // 
-            this.radioMailboxFull.AutoSize = true;
-            this.radioMailboxFull.Location = new System.Drawing.Point(6, 92);
-            this.radioMailboxFull.Name = "radioMailboxFull";
-            this.radioMailboxFull.Size = new System.Drawing.Size(113, 17);
-            this.radioMailboxFull.TabIndex = 16;
-            this.radioMailboxFull.Text = "Their mailbox is full";
-            this.radioMailboxFull.UseVisualStyleBackColor = true;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 53);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(162, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Why is this user\'s email boucing?";
             // 
-            // radioUnknownUser
+            // label6
             // 
-            this.radioUnknownUser.AutoSize = true;
-            this.radioUnknownUser.Checked = true;
-            this.radioUnknownUser.Location = new System.Drawing.Point(6, 69);
-            this.radioUnknownUser.Name = "radioUnknownUser";
-            this.radioUnknownUser.Size = new System.Drawing.Size(209, 17);
-            this.radioUnknownUser.TabIndex = 15;
-            this.radioUnknownUser.TabStop = true;
-            this.radioUnknownUser.Text = "The user is not registered on the server";
-            this.radioUnknownUser.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Username:";
             // 
             // btnAddAbounceAddress
             // 
@@ -277,23 +270,9 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // bounceErrorBindingSource
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 26);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Username:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 53);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(162, 13);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "Why is this user\'s email boucing?";
+            this.bounceErrorBindingSource.DataSource = typeof(SitefinityMailServer.Model.BounceError);
             // 
             // SettingsDialog
             // 
@@ -314,6 +293,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bounceErrorBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -338,11 +318,10 @@
         private System.Windows.Forms.TextBox txtAddBounceAddress;
         private System.Windows.Forms.Button btnAddAbounceAddress;
         private System.Windows.Forms.Button btnRemoveBounce;
-        private System.Windows.Forms.RadioButton radioUnknownUser;
-        private System.Windows.Forms.RadioButton radioMailboxFull;
-        private System.Windows.Forms.RadioButton radioOtherReason;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox bounceErrorCombo;
+        private System.Windows.Forms.BindingSource bounceErrorBindingSource;
     }
 }

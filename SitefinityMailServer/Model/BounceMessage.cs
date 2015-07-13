@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 
-namespace SitefinityMailServer
+namespace SitefinityMailServer.Model
 {
-    public class BouncedUserMessage
+    internal class BounceMessage
     {
         public string UserName { get; set; }
         public Guid SubscriberId { get; set; }
         public Guid CampaignId { get; set; }
         public string MessageData { get; set; }
 
-        public BouncedUserMessage(string messageContent, string bounceReason)
+        public BounceMessage(string messageContent, string bounceReason)
         {
             //this.MessageData = messageContent;
             StringReader reader = new StringReader(messageContent);
@@ -51,15 +54,5 @@ namespace SitefinityMailServer
                 "Bounced message!");
 
         }
-
-        public const string Bounce_UnknownUser = "5.1.1";
-        public const string Bounce_MailboxFull = "5.2.2";
-        public const string Bounce_Other = "5.0.0";
-    }
-
-    public class BounceUser
-    {
-        public string UserName { get; set; }
-        public string BounceReason { get; set; }
     }
 }

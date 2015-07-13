@@ -14,12 +14,13 @@ using System.Net;
 using SitefinityMailServer.POP3.Net;
 using System.Text;
 using System.Net.Sockets;
+using SitefinityMailServer.Model;
 
 namespace SitefinityMailServer
 {
     public partial class MailServerUI : Form
     {
-        const string curVersion = "Sitefinity Mail Server v0.6";
+        private const string CurrentVersion = "Sitefinity Mail Server v0.7";
 
         #region Construction
 
@@ -31,7 +32,7 @@ namespace SitefinityMailServer
             this.lblSwitchUpInactive.Click += new EventHandler(lblSwitchUpInactive_Click);
             this.lblSwitchDownInactive.Click += new EventHandler(lblSwitchDownInactive_Click);
             this.Resize += new EventHandler(MailServerUI_Resize);
-            this.Text = curVersion;
+            this.Text = CurrentVersion;
 
             this.SetImage(imgDown);
             messagesReceptionTimer.Elapsed += delegate { MessageReceptionTimerElapsed(); };
@@ -85,10 +86,13 @@ namespace SitefinityMailServer
                 string[] users = settings.BounceUsers.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string user in users)
                 {
-                    string[] parts = user.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-                    if (parts.Length > 1)
+                    string[] properties = user.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                    if (properties.Length > 1)
                     {
-                        bouncedUsers.Add(new BounceUser() { UserName = parts[0], BounceReason = parts[1] });
+                        var username = properties[0];
+                        var bounceCode = properties[1];
+                        var bounceError = BounceError.Get(bounceCode);
+                        bouncedUsers.Add(new BounceUser() { EmailAddress = username, BounceError = bounceError });
                     }
                 }
             }
@@ -163,7 +167,7 @@ namespace SitefinityMailServer
                 "WhazzuuuuuuuuUUUUuuuuup?!",
                 "Coffee?",
                 "Sintefinity Mail Server is now formatting your hard drive. This may take several minutes...",
-                curVersion + " kicks ass!",
+                CurrentVersion + " kicks ass!",
                 "I have nothing to say.",
                 ((timespan.Ticks > 0) ? 
                     string.Format("Hey, it's {0}! Only {1:00}:{2:00} hours til 18:00!", now.ToString("HH:mm"), timespan.Hours, timespan.Minutes+1) : 
@@ -207,8 +211,8 @@ namespace SitefinityMailServer
             #endregion
 
             Random random = new Random();
-            int message = random.Next(0, helloMessages.Length-1);
-            notifyIcon.ShowBalloonTip(5000, curVersion, helloMessages[message], ToolTipIcon.Info);
+            int message = random.Next(0, helloMessages.Length - 1);
+            notifyIcon.ShowBalloonTip(5000, CurrentVersion, helloMessages[message], ToolTipIcon.Info);
         }
 
         private void RestoreFromTray()
@@ -261,7 +265,7 @@ namespace SitefinityMailServer
             bounceCounter = 0;
             bouncedMessages.Clear();
             recipients.Clear();
-            UpadteStatistics();
+            UpdateStatistics();
         }
 
         private void lblMessages_Click(object sender, EventArgs e)
@@ -342,25 +346,25 @@ namespace SitefinityMailServer
             foreach (EmailAddress recipient in e.Message.ToAddresses)
             {
                 string bounced = "";
-                BounceUser user = this.bouncedUsers.FirstOrDefault(u => u.UserName.Equals(recipient.Address, StringComparison.CurrentCultureIgnoreCase));
+                BounceUser user = this.bouncedUsers.FirstOrDefault(u => u.EmailAddress.Equals(recipient.Address, StringComparison.CurrentCultureIgnoreCase));
                 if (user != null)
                 {
                     isBounced = true;
                     bounced = " (bounced)";
                     bounceCounter++;
-                    bouncedMessages.Add(new BouncedUserMessage(e.Message.Data, user.BounceReason));
+                    bouncedMessages.Add(new BounceMessage(e.Message.Data, user.BounceError.Code));
                 }
                 rec += ((rec == "") ? "" : ", ") + recipient.Address + bounced;
             }
             recipients.Add(rec);
             //this.messagesReceived.Add(new UserMessage() { MessageSource = e.Message.Data, Recipient = e.Message.ToAddresses.First().Address,  IsOpened = false });
-            UpadteStatistics();
+            UpdateStatistics();
             if (isInTray)
             {
                 if (!messagesReceptionTimer.Enabled)
                 {
-                    notifyIcon.ShowBalloonTip(1000, curVersion, "Hmmmm... I'm receiving some messages...", ToolTipIcon.Info);
-                    notifyIcon.Text = curVersion + ": Receving messages...";
+                    notifyIcon.ShowBalloonTip(1000, CurrentVersion, "Hmmmm... I'm receiving some messages...", ToolTipIcon.Info);
+                    notifyIcon.Text = CurrentVersion + ": Receving messages...";
                     messagesReceptionTimer.Start();
                 }
             }
@@ -375,8 +379,8 @@ namespace SitefinityMailServer
                     messagesReceptionTimer.Stop();
                     int num = messageCounter - finalTimerMessageCount;
                     string s = (num == 1) ? "" : "s";
-                    notifyIcon.Text = curVersion + " (Started): " + num + " message" + s + " in fake inbox!";
-                    notifyIcon.ShowBalloonTip(3000, curVersion, "I have " + num + " message" + s + " in my fake inbox!", ToolTipIcon.Info);
+                    notifyIcon.Text = CurrentVersion + " (Started): " + num + " message" + s + " in fake inbox!";
+                    notifyIcon.ShowBalloonTip(3000, CurrentVersion, "I have " + num + " message" + s + " in my fake inbox!", ToolTipIcon.Info);
                 }
                 else
                     previousTimerMessageCount = messageCounter;
@@ -398,9 +402,9 @@ namespace SitefinityMailServer
                 {
                     SetText(lblCollectionLog, "[" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + "] Bounced messages collected.");
                     bouncedMessages.Clear();
-                    UpadteStatistics();
-                    if(isInTray)
-                        notifyIcon.ShowBalloonTip(5000, curVersion, "Messages collected by Sitefinity's POP3 Client!", ToolTipIcon.Info);
+                    UpdateStatistics();
+                    if (isInTray)
+                        notifyIcon.ShowBalloonTip(5000, CurrentVersion, "Messages collected by Sitefinity's POP3 Client!", ToolTipIcon.Info);
                 }
             }
         }
@@ -645,7 +649,7 @@ namespace SitefinityMailServer
                     stopServer();
 
                 notifyIcon.Icon = new Icon(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(notifyOn));
-                notifyIcon.Text = curVersion + " (Stopped)";
+                notifyIcon.Text = CurrentVersion + " (Stopped)";
                 SetVisibility(notifyMenuStartServer, true, this.lblSwitchDownActive);
                 SetVisibility(notifyMenuStopServer, false, this.lblSwitchDownActive);
             }
@@ -659,16 +663,16 @@ namespace SitefinityMailServer
                     startServer();
 
                 notifyIcon.Icon = new Icon(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(notifyOff));
-                notifyIcon.Text = curVersion + " (Started)";
+                notifyIcon.Text = CurrentVersion + " (Started)";
                 SetVisibility(notifyMenuStartServer, false, this.lblSwitchDownActive);
                 SetVisibility(notifyMenuStopServer, true, this.lblSwitchDownActive);
             }
         }
 
-        private void UpadteStatistics()
+        private void UpdateStatistics()
         {
             SetText(lblMessages, string.Format("Messages processed: {0} ({1} bounced)", messageCounter, bounceCounter));
-            SetText(lblCurrentPendingBounced, string.Format("[{0}] {1} bounced message{2} in the queue", DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), bouncedMessages.Count.ToString(), ((bouncedMessages.Count == 1)? "" : "s")));
+            SetText(lblCurrentPendingBounced, string.Format("[{0}] {1} bounced message{2} in the queue", DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), bouncedMessages.Count.ToString(), ((bouncedMessages.Count == 1) ? "" : "s")));
             notifyMenuRecipients.Enabled = messageCounter > 0;
             notifyMenuRecipients.Text = "Recipients (" + messageCounter + ")";
         }
@@ -732,7 +736,7 @@ namespace SitefinityMailServer
                     bounceCounter = 0;
                     bouncedMessages.Clear();
                     recipients.Clear();
-                    UpadteStatistics();
+                    UpdateStatistics();
                     UpdateInfoStrip();
                 }
             }
@@ -767,8 +771,8 @@ namespace SitefinityMailServer
             this.TopMost = false;
             using (AboutDialog about = new AboutDialog())
             {
-                about.Text = curVersion;
-                about.VersionLabel.Text = curVersion;
+                about.Text = CurrentVersion;
+                about.VersionLabel.Text = CurrentVersion;
                 about.StartPosition = FormStartPosition.CenterScreen;
                 about.ShowDialog();
             }
@@ -788,7 +792,7 @@ namespace SitefinityMailServer
         int previousTimerMessageCount = 0;
         int finalTimerMessageCount = 0;
         List<string> recipients = new List<string>();
-        List<BouncedUserMessage> bouncedMessages = new List<BouncedUserMessage>();
+        List<BounceMessage> bouncedMessages = new List<BounceMessage>();
         List<BounceUser> bouncedUsers = new List<BounceUser>();
         int bounceCounter = 0;
 
