@@ -5,9 +5,9 @@ Sitefinity Mail Server is Windws Forms application for testing, inspecting and s
 ## Notable features
 * Runs an SMTP server (listening on any configured port) and receives messages (in contrast to tools like <a href="https://smtp4dev.codeplex.com/" target="_blank">smtp4dev</a>, messages are not stored and are not displayed, but only counted). Does not store any messages, does not really send any messages anywhere
    
-* SMTP messages are received for regardless of their recipients' addresses.
+* SMTP messages are received regardless of their recipients' addresses.
 
-* For specific configured email addresses, it produces bounce messages (the bounce reason is also configurable). Bounce messages are collected by POP3. If a message is sent to one of the bounced addresses, a fake bounced message is produced, which can be collected by Sitefinity later.   
+* For specific configured email addresses, automatically produces bounce messages (the bounce reason is also configurable). Bounce messages are collected by POP3. If a message is sent to one of the bounced addresses, a fake bounced message is produced, which can be collected by Sitefinity later.   
 ![](https://raw.githubusercontent.com/alonrotem/SitefinityMailServer/master/Screenshots/Screenshot%20-%20Options%20dialog.png)
 
 * Runs a POP3 server (The default port for the POP3 server is 995, same as the default one in Sitefinity, but any port can be set, as long as it matches Sitefinity's settings), through which bounced messages can be collected.  
